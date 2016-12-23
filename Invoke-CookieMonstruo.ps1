@@ -2,20 +2,23 @@ Function Invoke-CookieMonstruo{
 
   <#
   .SYNOPSIS
-  This function returns any passwords and history stored in the chrome sqlite databases.
+  Post-exploitation tool for cookie stealing and session hijacking
 
   .DESCRIPTION
-  This function uses the System.Data.SQLite assembly to parse the different sqlite db files used by chrome to save passwords and browsing history. The System.Data.SQLite assembly
-  cannot be loaded from memory. This is a limitation for assemblies that contain any unmanaged code and/or compiled without the /clr:safe option.
+  The tool can be used to dump the cookie database of a compromised Windows machine. By defining specific targets (facebook, gmail) an active session can be detected. Additionally other functionality like waiting until the user logs in and also removing the stolen cookies from the database is supported. 
+
+  The code is based on the Get-ChromeDump.ps1 module which can be found at:
+
+  https://raw.githubusercontent.com/adaptivethreat/Empire/master/data/module_source/collection/Get-ChromeDump.ps1
 
   .PARAMETER Browser
-  Choose the browser you want to target, currently supporting chrome and firefox
+  Choose the browser you want to target, currently supporting chrome and firefox. If none selected defaults to chrome
 
   .EXAMPLE
   Invoke-CookieMonstruo -Browser chrome
 
   .PARAMETER Target
-  Define a specific web application cookie that you are going for, currently supporting facebook and gmail
+  Define a specific web application cookie that you are going for, currently supporting facebook and gmail. If none selected it will dump the entire cookie database
 
   .EXAMPLE
   Invoke-CookieMonstruo -Target facebook
@@ -30,7 +33,7 @@ Function Invoke-CookieMonstruo{
   Switch to dump all results out to a file
 
   .EXAMPLE
-  Get-ChromeDump -OutFile "$env:HOMEPATH\chromepwds.txt"
+  Invoke-CookieMonstruo -OutFile "$env:HOMEPATH\cookies.txt"
   #>
 
 
