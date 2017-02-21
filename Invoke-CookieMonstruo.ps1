@@ -249,7 +249,7 @@ Function Invoke-CookieMonstruo{
             $domain = $cookie.domain
             $name = $cookie.name
             $value = $cookie.value
-            "$domain`tTRUE`t/`tFALSE`t000000000`t$name`t$value"
+            "$domain`tTRUE`t/`tFALSE`t000000000`t$name`t$value`t" | Out-String
         }
         "`n`n`n"
     }
