@@ -420,7 +420,7 @@ Function RemoveCookies ($connection, $Browser, $queryCondition)
     {
         Write-Warning "[!]Cannot parse Data files while chrome is running"
         Write-Warning "[!]Stopping all chrome processes"
-        Stop-Process -processname "*"+$Browser+"*"
+        Stop-Process -name "*$Browser*"
     }
     
     switch($Browser)
