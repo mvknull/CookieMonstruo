@@ -427,18 +427,18 @@ Function RemoveCookies ($connection, $Browser, $queryCondition)
     {
         "chrome"
         {
-            $decryptedBytes = [System.Text.Encoding]::ASCII.GetBytes("aaa")
+            $decryptedBytes = [System.Text.Encoding]::ASCII.GetBytes("sdlfksdljfaklsdj")
             $encryptedBytes = [Security.Cryptography.ProtectedData]::Protect($decryptedBytes, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser)
             $query = $connection.CreateCommand()
-            $query.CommandText = "UPDATE cookies SET encrypted_value = @encryptedBytes" + $queryCondition
-            [void]$query.Parameters.AddWithValue("@encryptedBytes", $encryptedBytes) 
+            $query.CommandText = "UPDATE cookies SET encrypted_value = @encryptedBytes " + $queryCondition
+            [void]$query.Parameters.AddWithValue("@encryptedBytes", $encryptedBytes)
+             
         }
         "firefox"
         {
             $query = $connection.CreateCommand()
-            $query.CommandText = "UPDATE moz_cookies SET value = 'aaa' " + $queryCondition 
-        }
-    
+            $query.CommandText = "UPDATE moz_cookies SET value = 'lsdkflsfjasdkjfls' " + $queryCondition 
+        }    
     }
-    [void]$query.ExecuteNonQuery()
+    $rowsAffected = $query.ExecuteNonQuery()
 }
