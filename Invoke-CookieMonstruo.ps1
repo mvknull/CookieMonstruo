@@ -247,9 +247,9 @@ Function Invoke-CookieMonstruo{
         $exportedString = "echo -e `""
         foreach ($cookie in $cookies)
         {
-            $domain = ($cookie.domain).Replace("\","\\").Replace("`"","\`"")
-            $name = ($cookie.name).Replace("\","\\").Replace("`"","\`"")
-            $value = ($cookie.value).Replace("\","\\").Replace("`"","\`"")
+            $domain = Sanitize-CookieForBash $cookie.domain
+            $name = Sanitize-CookieForBash $cookie.name
+            $value = Sanitize-CookieForBash $cookie.value
             $exportedString += "$domain\tTRUE\t/\tFALSE\t000000000\t$name\t$value\n"
         }
         $exportedString += "`" > cookies.txt `n"
@@ -265,6 +265,13 @@ Function Invoke-CookieMonstruo{
 
 
 #########################helper functions####################################
+
+Function Sanitize-CookieForBash($cookieString)
+{
+    return $cookieString.Replace("\","\\").Replace("`"","\`"").Replace("!","\!")
+}
+
+
 Function Test-ValidSession($Target, $cookies, $numberOfExpectedCookies)
 {
     $session = New-Object Microsoft.PowerShell.Commands.WebRequestSession
