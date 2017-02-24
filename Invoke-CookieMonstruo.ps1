@@ -268,7 +268,7 @@ Function Invoke-CookieMonstruo{
 
 Function Sanitize-CookieForBash($cookieString)
 {
-    return $cookieString.Replace("\","\\").Replace("`"","\`"").Replace("!","\!")
+    return $cookieString.Replace("\","\\").Replace("`"","\`"").Replace("!","\!").Replace("$","\$").Replace("!","\!").Replace("``","\``")
 }
 
 
