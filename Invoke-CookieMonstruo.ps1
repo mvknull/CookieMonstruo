@@ -247,9 +247,9 @@ Function Invoke-CookieMonstruo{
         $exportedString = "echo -e `""
         foreach ($cookie in $cookies)
         {
-            $domain = $cookie.domain
-            $name = $cookie.name
-            $value = $cookie.value
+            $domain = ($cookie.domain).Replace("\","\\").Replace("`"","\`"")
+            $name = ($cookie.name).Replace("\","\\").Replace("`"","\`"")
+            $value = ($cookie.value).Replace("\","\\").Replace("`"","\`"")
             $exportedString += "$domain\tTRUE\t/\tFALSE\t000000000\t$name\t$value\n"
         }
         $exportedString += "`" > cookies.txt `n"
